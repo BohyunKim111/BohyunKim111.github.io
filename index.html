@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="미래 반도체 전문가 김보현의 비전과 성장 로드맵을 소개합니다.">
-  <title>김보현 — Future Semiconductor Engineer</title>
+  <meta name="description" content="미래 반도체 전문가를 꿈꾸는 김보현의 현재 학습 과정, 탐구 계획과 2035년 비전을 소개합니다.">
+  <title>김보현 | 미래 반도체 전문가 포트폴리오</title>
   <style>
     :root {
       --ink: #eafcff;
@@ -17,6 +17,7 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 90px; }
     body {
       margin: 0;
       min-height: 100vh;
@@ -36,18 +37,23 @@
       opacity: .35;
     }
     .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .skip-link { position: fixed; left: 16px; top: -80px; z-index: 100; padding: 12px 16px; background: var(--cyan); color: #03100f; font-weight: 800; text-decoration: none; }
+    .skip-link:focus { top: 16px; }
+    .site-header { position: sticky; top: 0; z-index: 20; background: rgba(3, 9, 13, .78); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
     nav {
       height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--line);
       position: relative;
       z-index: 2;
     }
     .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.15rem; }
     .brand span { color: var(--cyan); }
-    .nav-note { color: var(--muted); font: 600 .78rem ui-monospace, monospace; letter-spacing: .14em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .88rem; font-weight: 700; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links .nav-github { color: var(--ink); padding: 10px 14px; border: 1px solid var(--line); }
     .hero {
       min-height: calc(100vh - 82px);
       display: grid;
@@ -62,6 +68,8 @@
     h1 em { display: block; color: transparent; -webkit-text-stroke: 1px rgba(234, 252, 255, .72); font-style: normal; }
     .intro { color: var(--muted); max-width: 620px; font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.85; word-break: keep-all; }
     .intro strong { color: var(--ink); }
+    .availability { display: flex; align-items: center; gap: 10px; margin-top: 22px; color: var(--muted); font: 700 .82rem ui-monospace, monospace; }
+    .availability::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
     .actions { display: flex; gap: 14px; margin-top: 38px; flex-wrap: wrap; }
     .button { display: inline-flex; align-items: center; gap: 10px; padding: 15px 20px; color: #03100f; background: var(--cyan); text-decoration: none; font-weight: 800; border-radius: 3px; }
     .button.secondary { color: var(--ink); background: transparent; border: 1px solid var(--line); }
@@ -84,6 +92,16 @@
     .section-head { display: grid; grid-template-columns: .45fr 1fr; gap: 50px; align-items: start; margin-bottom: 56px; }
     .section-no { color: var(--cyan); font: 700 .82rem ui-monospace, monospace; letter-spacing: .15em; }
     h2 { margin: 0; max-width: 820px; font-size: clamp(2.4rem, 5vw, 5rem); line-height: 1.05; letter-spacing: -.055em; word-break: keep-all; }
+    .about-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 18px; }
+    .identity { min-height: 440px; padding: 34px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+    .identity-mark { font: 900 clamp(6rem, 16vw, 12rem)/.8 ui-monospace, monospace; letter-spacing: -.12em; color: transparent; -webkit-text-stroke: 1px rgba(89,241,220,.38); }
+    .identity p { color: var(--muted); line-height: 1.7; margin: 0; }
+    .identity p strong { display: block; color: var(--ink); font-size: 1.25rem; margin-bottom: 8px; }
+    .fact-list { border-top: 1px solid var(--line); }
+    .fact { display: grid; grid-template-columns: 150px 1fr; gap: 28px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+    .fact dt { color: var(--cyan); font: 700 .82rem ui-monospace, monospace; letter-spacing: .08em; }
+    .fact dd { margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.75; word-break: keep-all; }
+    .fact dd strong { color: var(--ink); }
     .vision-grid { display: grid; grid-template-columns: 1.4fr .6fr; gap: 18px; }
     .glass { border: 1px solid var(--line); background: linear-gradient(145deg, rgba(12, 34, 42, .82), rgba(4, 13, 18, .68)); backdrop-filter: blur(14px); }
     .profile-card { padding: clamp(28px, 5vw, 58px); min-height: 420px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
@@ -102,6 +120,15 @@
     .discipline .code { color: var(--cyan); font: 700 .78rem ui-monospace, monospace; }
     .discipline h3 { margin: 70px 0 18px; font-size: 1.5rem; letter-spacing: -.035em; }
     .discipline p { color: var(--muted); line-height: 1.75; font-size: .96rem; word-break: keep-all; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project { padding: 30px; min-height: 360px; display: flex; flex-direction: column; transition: border-color .3s ease, transform .3s ease; }
+    .project:hover { border-color: rgba(89,241,220,.56); transform: translateY(-5px); }
+    .project-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .project-index { color: var(--muted); font: 700 .78rem ui-monospace, monospace; }
+    .project-state { color: var(--cyan); border: 1px solid rgba(89,241,220,.32); padding: 7px 9px; font: 700 .72rem ui-monospace, monospace; letter-spacing: .08em; }
+    .project h3 { margin: 72px 0 18px; font-size: 1.55rem; line-height: 1.3; letter-spacing: -.035em; word-break: keep-all; }
+    .project p { margin: 0; color: var(--muted); line-height: 1.75; word-break: keep-all; }
+    .project footer { margin-top: auto; padding: 26px 0 0; border: 0; color: var(--cyan); font: 700 .78rem ui-monospace, monospace; }
     .roadmap { position: relative; margin-top: 30px; }
     .roadmap::before { content: ""; position: absolute; top: 10px; bottom: 10px; left: 116px; width: 1px; background: linear-gradient(var(--cyan), var(--blue), transparent); }
     .phase { display: grid; grid-template-columns: 90px 1fr; gap: 56px; padding: 0 0 70px; position: relative; }
@@ -114,7 +141,10 @@
     .manifesto { margin: 130px 0 20px; padding: clamp(38px, 7vw, 86px); background: var(--cyan); color: #03100f; display: grid; grid-template-columns: .35fr 1fr; gap: 50px; }
     .manifesto .eyebrow { color: #164641; }
     .manifesto blockquote { margin: 0; font-size: clamp(2rem, 4.5vw, 4.6rem); font-weight: 850; line-height: 1.08; letter-spacing: -.055em; word-break: keep-all; }
-    footer { padding: 40px 0 56px; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    .contact { margin-bottom: 130px; padding: clamp(34px, 6vw, 68px); display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+    .contact h2 { font-size: clamp(2.4rem, 5vw, 4.8rem); margin-top: 16px; }
+    .contact p { color: var(--muted); line-height: 1.7; max-width: 650px; word-break: keep-all; }
+    .site-footer { padding: 40px 0 56px; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
     a:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
@@ -123,34 +153,43 @@
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; padding-top: 56px; }
       .chip { width: min(80vw, 360px); }
-      .nav-note { display: none; }
+      .nav-links a:not(.nav-github) { display: none; }
       section:not(.hero) { padding: 90px 0; }
-      .section-head, .vision-grid, .manifesto { grid-template-columns: 1fr; gap: 24px; }
-      .disciplines { grid-template-columns: 1fr; }
+      .section-head, .vision-grid, .manifesto, .about-grid, .contact { grid-template-columns: 1fr; gap: 24px; }
+      .disciplines, .project-grid { grid-template-columns: 1fr; }
       .discipline { min-height: auto; }
       .discipline h3 { margin-top: 36px; }
+      .fact { grid-template-columns: 1fr; gap: 10px; }
+      .project { min-height: 320px; }
       .roadmap::before { left: 6px; }
       .phase { grid-template-columns: 1fr; gap: 14px; padding-left: 34px; }
       .phase-copy { padding-left: 0; }
       .phase-copy::before { left: -33px; }
-      footer { flex-direction: column; }
+      .site-footer { flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; } }
   </style>
 </head>
 <body>
-  <header class="shell">
-    <nav aria-label="주요 탐색">
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <header class="site-header">
+    <nav class="shell" aria-label="주요 탐색">
       <div class="brand">BOHYUN<span>.LAB</span></div>
-      <div class="nav-note">SEMICONDUCTOR · 2035 VISION</div>
+      <div class="nav-links">
+        <a href="#about">현재의 나</a>
+        <a href="#expertise">관심 분야</a>
+        <a href="#projects">탐구 계획</a>
+        <a class="nav-github" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
     </nav>
   </header>
-  <main>
+  <main id="main">
     <section class="hero shell" aria-labelledby="hero-title">
       <div>
         <p class="eyebrow">Future Semiconductor Engineer</p>
         <h1 id="hero-title">보이지 않는 세계를<em>설계하는 사람.</em></h1>
         <p class="intro">안녕하세요, <strong>미래의 반도체 전문가 김보현</strong>입니다. 원자 단위의 정밀함과 시스템 전체를 바라보는 시선으로, 더 빠르고 효율적인 내일의 기술을 설계합니다.</p>
+        <p class="availability">현재 기초부터 한 단계씩 학습 중</p>
         <div class="actions">
           <a class="button" href="#vision">2035년의 나 보기 <span aria-hidden="true">↘</span></a>
           <a class="button secondary" href="#roadmap">성장 로드맵</a>
@@ -159,6 +198,23 @@
       <div class="chip" aria-label="미래 반도체 칩을 형상화한 그래픽">
         <div class="orbit"></div>
         <div class="core"><span>BK<br>NEURAL<br>CORE</span></div>
+      </div>
+    </section>
+    <section id="about" class="shell reveal" aria-labelledby="about-title">
+      <div class="section-head">
+        <div class="section-no">00 / ABOUT ME</div>
+        <h2 id="about-title">미래를 말하기 전에,<br>오늘의 나부터</h2>
+      </div>
+      <div class="about-grid">
+        <article class="identity glass">
+          <div class="identity-mark" aria-hidden="true">BK</div>
+          <p><strong>김보현 · Learner & Builder</strong>아직 완성된 전문가가 아니라, 매일 질문하고 직접 확인하며 성장하는 사람입니다.</p>
+        </article>
+        <dl class="fact-list">
+          <div class="fact"><dt>CURRENT FOCUS</dt><dd><strong>수학·물리·프로그래밍의 연결</strong>을 이해하며 반도체 공부의 기초 체력을 쌓고 있습니다.</dd></div>
+          <div class="fact"><dt>HOW I LEARN</dt><dd>모르는 것을 작게 나누고, 원리를 기록하고, 직접 만들어 보며 답을 찾습니다.</dd></div>
+          <div class="fact"><dt>WHERE I AIM</dt><dd>성능뿐 아니라 <strong>에너지 효율과 지속 가능성</strong>까지 생각하는 반도체 전문가를 목표로 합니다.</dd></div>
+        </dl>
       </div>
     </section>
     <section id="vision" class="shell reveal" aria-labelledby="vision-title">
@@ -182,7 +238,7 @@
       </div>
     </section>
 
-    <section class="shell reveal" aria-labelledby="expertise-title">
+    <section id="expertise" class="shell reveal" aria-labelledby="expertise-title">
       <div class="section-head">
         <div class="section-no">02 / EXPERTISE</div>
         <h2 id="expertise-title">세 개의 관점을 하나의 칩 안에 연결합니다</h2>
@@ -194,9 +250,21 @@
       </div>
     </section>
 
+    <section id="projects" class="shell reveal" aria-labelledby="projects-title">
+      <div class="section-head">
+        <div class="section-no">03 / NEXT PROJECTS</div>
+        <h2 id="projects-title">배운 것을 증명할<br>세 가지 탐구 계획</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project glass"><div class="project-top"><span class="project-index">PROJECT_01</span><span class="project-state">PLANNED</span></div><h3>반도체 원리 시각화</h3><p>전압에 따라 전류가 어떻게 달라지는지 직접 표현하며 트랜지스터의 기본 동작을 이해합니다.</p><footer>PHYSICS · VISUALIZATION</footer></article>
+        <article class="project glass"><div class="project-top"><span class="project-index">PROJECT_02</span><span class="project-state">PLANNED</span></div><h3>저전력 AI 연산 탐구</h3><p>같은 계산을 더 적은 에너지로 처리할 방법을 비교하며 AI 반도체의 핵심 과제를 공부합니다.</p><footer>AI CHIP · EFFICIENCY</footer></article>
+        <article class="project glass"><div class="project-top"><span class="project-index">PROJECT_03</span><span class="project-state">PLANNED</span></div><h3>칩렛 연결 구조 실험</h3><p>여러 기능의 칩을 연결하는 방식을 조사하고 성능과 확장성 사이의 균형을 분석합니다.</p><footer>CHIPLET · SYSTEM</footer></article>
+      </div>
+    </section>
+
     <section id="roadmap" class="shell reveal" aria-labelledby="roadmap-title">
       <div class="section-head">
-        <div class="section-no">03 / ROADMAP</div>
+        <div class="section-no">04 / ROADMAP</div>
         <h2 id="roadmap-title">오늘의 배움이 미래의 기술이 되는 과정</h2>
       </div>
       <div class="roadmap">
@@ -210,8 +278,16 @@
         <blockquote>“작게 설계하고,<br>크게 변화시킨다.”</blockquote>
       </aside>
     </section>
+    <section id="contact" class="contact shell glass reveal" aria-labelledby="contact-title">
+      <div>
+        <p class="eyebrow">LET'S CONNECT</p>
+        <h2 id="contact-title">성장 과정을<br>GitHub에 기록합니다.</h2>
+        <p>배우고, 만들고, 개선한 과정이 쌓이는 공간입니다. 오늘의 작은 기록이 미래의 전문성을 증명하도록 꾸준히 채워가겠습니다.</p>
+      </div>
+      <a class="button" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub 방문하기 <span aria-hidden="true">↗</span></a>
+    </section>
   </main>
-  <footer class="shell">
+  <footer class="site-footer shell">
     <strong>BOHYUN KIM · FUTURE CHIP ARCHITECT</strong>
     <span>Curiosity engineered into tomorrow.</span>
   </footer>
