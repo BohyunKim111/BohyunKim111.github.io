@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="반도체와 기술의 미래를 공부하는 김보현의 개인 홈페이지입니다.">
-  <title>김보현 | 개인 홈페이지</title>
+  <meta name="description" content="서울대학교 첨단융합학부에서 반도체와 미래 기술을 공부하는 김보현의 개인 홈페이지입니다.">
+  <title>김보현 | 서울대학교 첨단융합학부</title>
   <style>
     :root {
-      --navy: #10243e;
-      --blue: #2f66f5;
-      --mint: #baf7df;
-      --paper: #f7f8f4;
-      --white: #ffffff;
-      --text: #26364b;
-      --muted: #68758a;
-      --line: #dfe4e8;
-      --shadow: 0 18px 50px rgba(16, 36, 62, 0.08);
+      --night: #050614;
+      --night-2: #0a0d24;
+      --panel: rgba(18, 23, 55, 0.68);
+      --text: #f6f7ff;
+      --muted: #a8b0cc;
+      --cyan: #61f4e7;
+      --blue: #587cff;
+      --violet: #a968ff;
+      --gold: #ffcc7a;
+      --line: rgba(160, 176, 255, 0.2);
+      --glow: 0 24px 80px rgba(48, 73, 207, 0.2);
     }
 
     * {
@@ -29,9 +31,26 @@
     body {
       margin: 0;
       color: var(--text);
-      background: var(--paper);
+      background:
+        radial-gradient(circle at 12% 24%, rgba(66, 70, 214, 0.18), transparent 28rem),
+        radial-gradient(circle at 88% 64%, rgba(150, 74, 224, 0.12), transparent 30rem),
+        var(--night);
       font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(108, 130, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 130, 255, 0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+      pointer-events: none;
     }
 
     a {
@@ -41,35 +60,35 @@
     .skip-link {
       position: fixed;
       top: -70px;
-      left: 16px;
+      left: 18px;
       z-index: 100;
-      padding: 11px 16px;
-      color: var(--white);
-      background: var(--navy);
+      padding: 12px 16px;
+      color: #061019;
+      background: var(--cyan);
+      font-weight: 800;
       text-decoration: none;
-      font-weight: 700;
     }
 
     .skip-link:focus {
-      top: 16px;
+      top: 18px;
     }
 
     .container {
-      width: min(1080px, calc(100% - 40px));
+      width: min(1180px, calc(100% - 44px));
       margin: 0 auto;
     }
 
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(247, 248, 244, 0.92);
-      border-bottom: 1px solid rgba(16, 36, 62, 0.1);
-      backdrop-filter: blur(14px);
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 30;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(5, 6, 20, 0.62);
+      backdrop-filter: blur(18px);
     }
 
     .nav {
-      min-height: 72px;
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -77,20 +96,33 @@
     }
 
     .logo {
-      color: var(--navy);
-      font-size: 1.08rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-decoration: none;
     }
 
-    .logo span {
-      color: var(--blue);
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(97, 244, 231, 0.5);
+      border-radius: 8px;
+      color: var(--cyan);
+      background: rgba(97, 244, 231, 0.08);
+      font-size: 0.75rem;
+      box-shadow: 0 0 24px rgba(97, 244, 231, 0.14);
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      align-items: center;
+      gap: 30px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -98,14 +130,22 @@
 
     .nav-links a {
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
+      transition: color 0.2s ease;
     }
 
     .nav-links a:hover,
     .nav-links a:focus-visible {
-      color: var(--blue);
+      color: var(--cyan);
+    }
+
+    .nav-links .github-link {
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
     }
 
     main {
@@ -117,20 +157,55 @@
     }
 
     .hero {
-      min-height: 680px;
+      position: relative;
+      min-height: 100svh;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
       align-items: center;
-      gap: 72px;
-      padding: 96px 0;
+      isolation: isolate;
+      background:
+        linear-gradient(90deg, rgba(5, 6, 20, 0.96) 0%, rgba(5, 6, 20, 0.74) 43%, rgba(5, 6, 20, 0.14) 76%),
+        linear-gradient(0deg, var(--night) 0%, transparent 34%),
+        url("assets/hero-semiconductor.png") center / cover no-repeat;
     }
 
-    .eyebrow {
-      margin: 0 0 20px;
-      color: var(--blue);
-      font-size: 0.83rem;
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(120deg, transparent 42%, rgba(102, 60, 255, 0.18), transparent 68%);
+      animation: light-sweep 8s ease-in-out infinite;
+    }
+
+    .hero-content {
+      padding-top: 130px;
+      padding-bottom: 100px;
+    }
+
+    .affiliation {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 30px;
+      padding: 10px 15px;
+      border: 1px solid rgba(97, 244, 231, 0.3);
+      border-radius: 999px;
+      color: var(--cyan);
+      background: rgba(8, 19, 36, 0.64);
+      font-size: 0.82rem;
       font-weight: 800;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.06em;
+      backdrop-filter: blur(12px);
+    }
+
+    .affiliation::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 15px var(--cyan);
     }
 
     h1,
@@ -141,318 +216,450 @@
     }
 
     h1 {
+      max-width: 820px;
       margin: 0;
-      color: var(--navy);
-      font-size: clamp(3.5rem, 8vw, 7.2rem);
-      line-height: 0.95;
-      letter-spacing: -0.075em;
+      font-size: clamp(4.2rem, 10vw, 8.6rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
     }
 
-    .hero-intro {
-      max-width: 620px;
+    h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(100deg, var(--cyan), #a6bbff 42%, #d58cff 80%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      text-shadow: 0 0 50px rgba(91, 126, 255, 0.14);
+    }
+
+    .hero-copy {
+      max-width: 650px;
       margin: 32px 0 0;
       color: var(--muted);
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-size: clamp(1.05rem, 1.8vw, 1.28rem);
     }
 
-    .hero-intro strong {
+    .hero-copy strong {
       color: var(--text);
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
+      gap: 14px;
+      margin-top: 38px;
     }
 
     .button {
-      min-height: 48px;
+      min-height: 52px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 12px 18px;
-      border: 1px solid var(--blue);
-      border-radius: 8px;
-      color: var(--white);
-      background: var(--blue);
+      gap: 10px;
+      padding: 13px 20px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      color: #061019;
+      background: linear-gradient(120deg, var(--cyan), #8ab6ff);
       text-decoration: none;
-      font-weight: 800;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 900;
+      box-shadow: 0 12px 36px rgba(74, 169, 255, 0.18);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .button.secondary {
-      color: var(--navy);
-      background: transparent;
+      color: var(--text);
+      background: rgba(12, 17, 44, 0.62);
       border-color: var(--line);
+      box-shadow: none;
+      backdrop-filter: blur(10px);
     }
 
     .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(47, 102, 245, 0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 42px rgba(74, 169, 255, 0.28);
     }
 
-    .profile-card {
-      position: relative;
-      min-height: 390px;
+    .hero-meta {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 34px;
-      background: var(--navy);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
+      flex-wrap: wrap;
+      gap: 38px;
+      margin: 70px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-meta li {
+      padding-left: 14px;
+      border-left: 2px solid var(--cyan);
+    }
+
+    .hero-meta b {
+      display: block;
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .hero-meta span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .ticker {
+      border-block: 1px solid var(--line);
+      background: rgba(11, 15, 38, 0.88);
       overflow: hidden;
     }
 
-    .profile-card::before {
-      content: "";
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      top: -80px;
-      right: -70px;
-      border: 52px solid var(--mint);
-      border-radius: 50%;
-      opacity: 0.95;
-    }
-
-    .profile-card::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      right: 46px;
-      bottom: 54px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transform: rotate(45deg);
-    }
-
-    .profile-label {
-      position: relative;
-      z-index: 1;
-      color: var(--mint);
+    .ticker-track {
+      width: max-content;
+      display: flex;
+      gap: 46px;
+      padding: 16px 0;
+      color: var(--muted);
       font-size: 0.78rem;
       font-weight: 800;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.15em;
+      animation: ticker 28s linear infinite;
     }
 
-    .initials {
-      position: relative;
-      z-index: 1;
-      color: var(--white);
-      font-size: clamp(5rem, 12vw, 8.5rem);
-      font-weight: 900;
-      line-height: 0.8;
-      letter-spacing: -0.09em;
-    }
-
-    .profile-card small {
-      position: relative;
-      z-index: 1;
-      color: rgba(255, 255, 255, 0.64);
-      font-size: 0.84rem;
+    .ticker-track span::after {
+      content: "✦";
+      margin-left: 46px;
+      color: var(--violet);
     }
 
     .content-section {
-      padding: 110px 0;
-      border-top: 1px solid var(--line);
+      padding: 130px 0;
+      position: relative;
     }
 
     .section-heading {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 48px;
-      margin-bottom: 54px;
+      grid-template-columns: 170px 1fr;
+      gap: 54px;
+      align-items: start;
+      margin-bottom: 64px;
     }
 
     .section-number {
-      color: var(--blue);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
     }
 
     h2 {
-      max-width: 720px;
+      max-width: 800px;
       margin: 0;
-      color: var(--navy);
-      font-size: clamp(2.2rem, 5vw, 4.2rem);
-      line-height: 1.12;
-      letter-spacing: -0.055em;
+      font-size: clamp(2.7rem, 6vw, 5.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.065em;
     }
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 20px;
     }
 
-    .about-main,
-    .about-note {
-      padding: clamp(28px, 5vw, 52px);
-      border-radius: 18px;
+    .glass {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(25, 32, 72, 0.68), rgba(8, 11, 29, 0.76));
+      box-shadow: var(--glow);
+      backdrop-filter: blur(16px);
     }
 
     .about-main {
-      background: var(--white);
-      box-shadow: var(--shadow);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(32px, 5vw, 58px);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
     }
 
-    .about-note {
-      background: var(--mint);
+    .about-main::after {
+      content: "SNU";
+      position: absolute;
+      right: -10px;
+      bottom: -38px;
+      color: rgba(255, 255, 255, 0.035);
+      font-size: clamp(7rem, 18vw, 13rem);
+      font-weight: 900;
+      letter-spacing: -0.08em;
     }
 
     .about-main h3,
-    .about-note h3,
-    .interest-card h3 {
-      margin: 0 0 18px;
-      color: var(--navy);
-      font-size: 1.45rem;
-      letter-spacing: -0.035em;
+    .focus-card h3 {
+      margin: 0 0 20px;
+      font-size: 1.65rem;
+      letter-spacing: -0.04em;
     }
 
-    .about-main p,
-    .about-note p,
-    .interest-card p {
+    .about-main p {
+      max-width: 700px;
       margin: 0;
       color: var(--muted);
+      font-size: 1.05rem;
     }
 
-    .about-note p {
-      color: #35564e;
+    .about-label {
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
     }
 
-    .interest-grid {
+    .about-side {
+      display: grid;
+      gap: 20px;
+    }
+
+    .stat {
+      min-height: 126px;
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 28px;
+      border-radius: 20px;
+    }
+
+    .stat b {
+      color: transparent;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      background-clip: text;
+      -webkit-background-clip: text;
+      font-size: 2.1rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .focus-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .interest-card {
-      min-height: 285px;
+    .focus-card {
+      min-height: 360px;
       display: flex;
       flex-direction: column;
       padding: 30px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .interest-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--blue);
+    .focus-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(97, 244, 231, 0.56);
     }
 
-    .interest-icon {
-      width: 46px;
-      height: 46px;
+    .focus-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(103, 92, 255, 0.48), transparent 70%);
+    }
+
+    .focus-index {
+      width: 50px;
+      height: 50px;
       display: grid;
       place-items: center;
-      margin-bottom: 58px;
-      color: var(--blue);
-      background: #edf2ff;
-      border-radius: 12px;
-      font-size: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--cyan);
+      background: rgba(97, 244, 231, 0.06);
       font-weight: 900;
+    }
+
+    .focus-card h3 {
+      margin-top: 70px;
+    }
+
+    .focus-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .focus-tag {
+      margin-top: auto;
+      padding-top: 30px;
+      color: var(--violet);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .vision {
+      margin-top: 30px;
+      padding: clamp(44px, 8vw, 90px);
+      border-radius: 26px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(125deg, rgba(15, 23, 61, 0.96), rgba(73, 30, 117, 0.82)),
+        url("assets/hero-semiconductor.png") center / cover no-repeat;
+    }
+
+    .vision::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 85% 20%, rgba(97, 244, 231, 0.3), transparent 26%);
+    }
+
+    .vision > * {
+      position: relative;
+    }
+
+    .vision .section-number {
+      display: block;
+      margin-bottom: 28px;
+    }
+
+    .vision blockquote {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(2.2rem, 5.5vw, 5.3rem);
+      font-weight: 900;
+      line-height: 1.07;
+      letter-spacing: -0.06em;
+    }
+
+    .vision p {
+      max-width: 690px;
+      margin: 30px 0 0;
+      color: #c2cae3;
+      font-size: 1.05rem;
     }
 
     .contact-box {
       display: grid;
       grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 40px;
-      padding: clamp(34px, 7vw, 72px);
-      color: var(--white);
-      background: var(--navy);
-      border-radius: 22px;
+      align-items: end;
+      gap: 48px;
+      padding: clamp(42px, 7vw, 78px);
+      border-radius: 24px;
+      background: linear-gradient(120deg, #5945f0, #7d3bc6 62%, #b448b9);
+      box-shadow: 0 24px 100px rgba(93, 69, 240, 0.24);
     }
 
     .contact-box h2 {
-      color: var(--white);
+      max-width: 760px;
     }
 
     .contact-box p {
-      max-width: 600px;
-      margin: 20px 0 0;
-      color: rgba(255, 255, 255, 0.7);
+      max-width: 620px;
+      margin: 22px 0 0;
+      color: rgba(255, 255, 255, 0.78);
     }
 
     .contact-box .button {
-      color: var(--navy);
-      background: var(--mint);
-      border-color: var(--mint);
+      color: #1c1640;
+      background: var(--text);
+      white-space: nowrap;
     }
 
     .site-footer {
       display: flex;
       justify-content: space-between;
-      gap: 20px;
-      padding: 36px 0 48px;
+      gap: 24px;
+      padding: 44px 0 54px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
     }
 
     a:focus-visible {
-      outline: 3px solid var(--blue);
+      outline: 3px solid var(--cyan);
       outline-offset: 4px;
     }
 
-    @media (max-width: 760px) {
+    @keyframes light-sweep {
+      0%, 100% { transform: translateX(-10%); opacity: 0.4; }
+      50% { transform: translateX(10%); opacity: 0.8; }
+    }
+
+    @keyframes ticker {
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 820px) {
       .container {
-        width: min(100% - 28px, 1080px);
+        width: min(100% - 30px, 1180px);
       }
 
       .nav {
-        min-height: 64px;
+        min-height: 68px;
       }
 
-      .nav-links {
-        gap: 16px;
-      }
-
-      .nav-links li:first-child {
+      .nav-links li:not(:last-child) {
         display: none;
       }
 
       .hero {
-        min-height: auto;
-        grid-template-columns: 1fr;
-        gap: 54px;
-        padding: 72px 0 84px;
+        min-height: 820px;
+        align-items: end;
+        background:
+          linear-gradient(0deg, var(--night) 0%, rgba(5, 6, 20, 0.74) 58%, rgba(5, 6, 20, 0.2) 100%),
+          url("assets/hero-semiconductor.png") 68% center / cover no-repeat;
+      }
+
+      .hero-content {
+        padding-top: 170px;
+        padding-bottom: 70px;
       }
 
       h1 {
-        font-size: clamp(3.3rem, 17vw, 5.4rem);
+        font-size: clamp(4rem, 20vw, 6.8rem);
       }
 
-      .profile-card {
-        min-height: 320px;
+      .hero-meta {
+        gap: 22px;
       }
 
       .content-section {
-        padding: 82px 0;
+        padding: 92px 0;
       }
 
       .section-heading,
       .about-grid,
-      .interest-grid,
+      .focus-grid,
       .contact-box {
         grid-template-columns: 1fr;
       }
 
       .section-heading {
-        gap: 18px;
+        gap: 20px;
       }
 
-      .interest-card {
-        min-height: auto;
-      }
-
-      .interest-icon {
-        margin-bottom: 36px;
+      .focus-card {
+        min-height: 330px;
       }
 
       .contact-box {
@@ -476,7 +683,13 @@
       *,
       *::before,
       *::after {
+        animation: none !important;
         transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -486,101 +699,128 @@
 
   <header class="site-header">
     <nav class="nav container" aria-label="주요 메뉴">
-      <a class="logo" href="#top">BOHYUN<span>.</span></a>
+      <a class="logo" href="#top"><span class="logo-mark">BK</span> BOHYUN.LAB</a>
       <ul class="nav-links">
         <li><a href="#about">소개</a></li>
         <li><a href="#interests">관심사</a></li>
-        <li><a href="#contact">연락처</a></li>
+        <li><a href="#vision">비전</a></li>
+        <li><a class="github-link" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub ↗</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero container" id="top" aria-labelledby="hero-title">
-      <div>
-        <p class="eyebrow">HELLO, I’M</p>
-        <h1 id="hero-title">김보현</h1>
-        <p class="hero-intro">
-          안녕하세요. <strong>반도체와 기술의 미래를 공부하는 김보현</strong>입니다.<br>
-          호기심을 직접 만들고 실험하는 경험으로 바꾸며 성장하고 있습니다.
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-content container">
+        <p class="affiliation">서울대학교 첨단융합학부</p>
+        <h1 id="hero-title">김보현<span>미래를 설계하다.</span></h1>
+        <p class="hero-copy">
+          안녕하세요. <strong>반도체와 첨단 기술의 경계를 탐구하는 학생 김보현</strong>입니다.
+          서로 다른 분야의 지식을 연결해 더 빠르고 효율적인 미래를 만들고 싶습니다.
         </p>
         <div class="hero-actions">
           <a class="button" href="#about">저를 소개합니다 <span aria-hidden="true">↓</span></a>
-          <a class="button secondary" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub 보기 <span aria-hidden="true">↗</span></a>
         </div>
-      </div>
-
-      <aside class="profile-card" aria-label="김보현 프로필">
-        <span class="profile-label">PERSONAL HOMEPAGE</span>
-        <div class="initials" aria-hidden="true">BK</div>
-        <small>LEARN · BUILD · GROW</small>
-      </aside>
-    </section>
-
-    <section class="content-section" id="about" aria-labelledby="about-title">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-number">01 / 소개</span>
-          <h2 id="about-title">배운 것을 직접 확인하며 성장합니다.</h2>
-        </div>
-
-        <div class="about-grid">
-          <article class="about-main">
-            <h3>현재의 나</h3>
-            <p>수학과 물리, 프로그래밍의 기초를 차근차근 익히고 있습니다. 어려운 문제를 작은 단위로 나누고, 원리를 이해할 때까지 질문하는 과정을 좋아합니다.</p>
-          </article>
-          <article class="about-note">
-            <h3>미래의 목표</h3>
-            <p>소자부터 회로와 시스템까지 폭넓게 이해하고, 성능과 에너지 효율을 함께 발전시키는 반도체 전문가가 되고 싶습니다.</p>
-          </article>
-        </div>
+        <ul class="hero-meta" aria-label="프로필 요약">
+          <li><b>STUDENT</b><span>서울대학교</span></li>
+          <li><b>MAJOR</b><span>첨단융합학부</span></li>
+          <li><b>FOCUS</b><span>Semiconductor · AI</span></li>
+        </ul>
       </div>
     </section>
 
-    <section class="content-section" id="interests" aria-labelledby="interests-title">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-number">02 / 관심사</span>
-          <h2 id="interests-title">작은 기술이 만드는 큰 변화를 탐구합니다.</h2>
-        </div>
-
-        <div class="interest-grid">
-          <article class="interest-card">
-            <span class="interest-icon" aria-hidden="true">01</span>
-            <h3>반도체</h3>
-            <p>작은 소자가 정보를 처리하는 원리와 차세대 반도체 기술에 관심이 있습니다.</p>
-          </article>
-          <article class="interest-card">
-            <span class="interest-icon" aria-hidden="true">02</span>
-            <h3>AI 칩</h3>
-            <p>인공지능 연산을 더 빠르고 효율적으로 만드는 칩 구조를 공부하고 싶습니다.</p>
-          </article>
-          <article class="interest-card">
-            <span class="interest-icon" aria-hidden="true">03</span>
-            <h3>프로그래밍</h3>
-            <p>생각을 실제 결과물로 만들고 문제를 논리적으로 해결하는 방법을 배우고 있습니다.</p>
-          </article>
-        </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>SEMICONDUCTOR</span><span>ARTIFICIAL INTELLIGENCE</span><span>TRANSDISCIPLINARY STUDIES</span><span>FUTURE TECHNOLOGY</span>
+        <span>SEMICONDUCTOR</span><span>ARTIFICIAL INTELLIGENCE</span><span>TRANSDISCIPLINARY STUDIES</span><span>FUTURE TECHNOLOGY</span>
       </div>
-    </section>
+    </div>
 
-    <section class="content-section" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="contact-box">
+    <section class="content-section container reveal" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <span class="section-number">01 / ABOUT</span>
+        <h2 id="about-title">분야의 경계를 넘어<br>새로운 답을 찾습니다.</h2>
+      </div>
+      <div class="about-grid">
+        <article class="about-main glass">
+          <span class="about-label">SEOUL NATIONAL UNIVERSITY</span>
           <div>
-            <p class="eyebrow">CONTACT</p>
-            <h2 id="contact-title">GitHub에서 성장 과정을 기록합니다.</h2>
-            <p>새롭게 배우고 만든 결과를 하나씩 쌓아가겠습니다. 아래 버튼을 누르면 제 GitHub 프로필을 볼 수 있습니다.</p>
+            <h3>서울대학교 첨단융합학부 학생</h3>
+            <p>첨단 기술을 한 가지 관점으로만 바라보지 않고, 수학·물리·프로그래밍을 연결해 이해하려고 노력합니다. 배운 원리를 직접 확인하고 결과로 만드는 과정에서 성장하고 있습니다.</p>
           </div>
-          <a class="button" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub 방문하기 <span aria-hidden="true">↗</span></a>
+        </article>
+        <div class="about-side" aria-label="나의 성장 방식">
+          <div class="stat glass"><b>01</b><span>모르는 것을 끝까지 파고드는 호기심</span></div>
+          <div class="stat glass"><b>02</b><span>분야와 분야 사이를 연결하는 융합적 시선</span></div>
+          <div class="stat glass"><b>03</b><span>생각을 직접 구현하고 검증하는 실행력</span></div>
         </div>
+      </div>
+    </section>
+
+    <section class="content-section container reveal" id="interests" aria-labelledby="interests-title">
+      <div class="section-heading">
+        <span class="section-number">02 / INTERESTS</span>
+        <h2 id="interests-title">지금 가장 깊이<br>탐구하고 싶은 것들</h2>
+      </div>
+      <div class="focus-grid">
+        <article class="focus-card glass">
+          <span class="focus-index">01</span>
+          <h3>반도체</h3>
+          <p>작은 소자의 구조가 거대한 디지털 세계를 움직이는 원리를 탐구합니다.</p>
+          <span class="focus-tag">DEVICE · PROCESS</span>
+        </article>
+        <article class="focus-card glass">
+          <span class="focus-index">02</span>
+          <h3>AI 반도체</h3>
+          <p>인공지능 연산의 속도와 에너지 효율을 함께 높이는 칩 구조에 관심이 있습니다.</p>
+          <span class="focus-tag">AI CHIP · EFFICIENCY</span>
+        </article>
+        <article class="focus-card glass">
+          <span class="focus-index">03</span>
+          <h3>프로그래밍</h3>
+          <p>아이디어를 실제로 구현하고 복잡한 문제를 논리적으로 해결하는 도구로 활용합니다.</p>
+          <span class="focus-tag">CODE · PROTOTYPE</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section container reveal" id="vision" aria-labelledby="vision-title">
+      <div class="vision">
+        <span class="section-number">03 / MY VISION</span>
+        <blockquote id="vision-title">“작은 칩에서 시작해,<br>더 큰 미래를 설계한다.”</blockquote>
+        <p>전공의 경계를 자유롭게 넘나들며 소자, 회로, 시스템을 함께 바라보는 반도체 전문가로 성장하겠습니다. 기술의 성능뿐 아니라 사람과 환경에 미치는 영향까지 고민하는 엔지니어가 되고 싶습니다.</p>
+      </div>
+    </section>
+
+    <section class="content-section container reveal" id="contact" aria-labelledby="contact-title">
+      <div class="contact-box">
+        <div>
+          <span class="section-number">04 / CONNECT</span>
+          <h2 id="contact-title">배움과 도전의 기록을<br>GitHub에 쌓아갑니다.</h2>
+          <p>관심 분야를 공부하고 직접 만든 결과를 하나씩 기록하겠습니다.</p>
+        </div>
+        <a class="button" href="https://github.com/BohyunKim111" target="_blank" rel="noreferrer">GitHub 방문하기 <span aria-hidden="true">↗</span></a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer container">
-    <strong>김보현의 개인 홈페이지</strong>
+    <strong>BOHYUN KIM · SNU TRANSDISCIPLINARY STUDIES</strong>
     <span>© 2026 Bohyun Kim</span>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  </script>
 </body>
 </html>
